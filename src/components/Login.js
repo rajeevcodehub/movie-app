@@ -1,9 +1,66 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useRef, useState } from "react";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
+import validation from "../utils/validation";
 const Login = () => {
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const nameRef = useRef(null);
+  const [error, setError] = useState("");
   const [isUserExist, setUserExist] = useState(true);
+  const navigate = useNavigate();
   const toggleSignInForm = () => {
     setUserExist(!isUserExist);
+  };
+
+  const handleSubmitButton = (event) => {
+    event.preventDefault();
+    const validate = validation(
+      emailRef.current.value,
+      passwordRef.current.value
+    );
+    setError(validate);
+    if (!isUserExist && validate === null) {
+      createUser(emailRef.current.value, passwordRef.current.value);
+    }
+    if (isUserExist && validate === null) {
+      signIn(emailRef.current.value, passwordRef.current.value);
+    }
+    emailRef.current.value = "";
+    passwordRef.current.value = "";
+  };
+
+  const createUser = (email, password) => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+        navigate('/browse')
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(error);
+        // ..
+      });
+  };
+
+  const signIn = (email, password) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        navigate('/browse')
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(errorMessage);
+      });
   };
 
   return (
@@ -20,22 +77,32 @@ const Login = () => {
         </h1>
         {!isUserExist && (
           <input
+            ref={nameRef}
             type="text"
             placeholder="Full Name"
             className="p-4 bg-gray-700 w-full my-2 rounded-lg"
           />
         )}
         <input
+          ref={emailRef}
           type="text"
           placeholder="Email or Phone Number"
           className="p-4 bg-gray-700 w-full my-2 rounded-lg"
         />
         <input
+          ref={passwordRef}
           type="password"
           placeholder="Password"
           className="p-4 bg-gray-700 my-2 w-full rounded-lg"
         />
-        <button className="text-white w-full my-4 h-12 text-1xl rounded-lg bg-red-700">
+        {error?.length && <p className="text-white">{error}</p>}
+
+        <button
+          className="text-white w-full my-4 h-12 text-1xl rounded-lg bg-red-700"
+          onClick={(event) => {
+            handleSubmitButton(event);
+          }}
+        >
           {isUserExist ? "Sign In" : "Sign Up"}
         </button>
         <div className="flex justify-between">
