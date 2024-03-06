@@ -3,16 +3,19 @@ import { useRef, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
+import { useDispatch } from "react-redux";
 import { auth } from "../utils/firebase";
 import validation from "../utils/validation";
+import { addUser } from "../utils/userSlice";
 const Login = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const nameRef = useRef(null);
   const [error, setError] = useState("");
   const [isUserExist, setUserExist] = useState(true);
-  const navigate = useNavigate();
+  const  dispatch  = useDispatch();
   const toggleSignInForm = () => {
     setUserExist(!isUserExist);
   };
@@ -37,9 +40,27 @@ const Login = () => {
   const createUser = (email, password) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed up
         const user = userCredential.user;
-        navigate('/browse')
+        updateProfile(user, {
+          displayName: nameRef.current.value,
+          photoURL:
+            "https://lh3.googleusercontent.com/a/ACg8ocIaPWI3KJ_oeMpg0n186kKRMUHNDoCBM_IpviI7A3LRtC4=s192-c-rg-br100",
+        })
+          .then(() => {
+            const { uid, email, displayName, photoURL } = auth.currentUser;
+            dispatch(
+              addUser({
+                uid: uid,
+                email: email,
+                displayName: displayName,
+                photoURL: photoURL,
+              })
+            );
+            console.log("user profile updated");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -54,7 +75,6 @@ const Login = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        navigate('/browse')
       })
       .catch((error) => {
         const errorCode = error.code;
