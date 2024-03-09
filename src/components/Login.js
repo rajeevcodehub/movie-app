@@ -9,13 +9,18 @@ import { useDispatch } from "react-redux";
 import { auth } from "../utils/firebase";
 import validation from "../utils/validation";
 import { addUser } from "../utils/userSlice";
+import Header from "./Header";
+
 const Login = () => {
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [isUserExist, setUserExist] = useState(true);
+  const dispatch = useDispatch();
+
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const nameRef = useRef(null);
-  const [error, setError] = useState("");
-  const [isUserExist, setUserExist] = useState(true);
-  const  dispatch  = useDispatch();
+
   const toggleSignInForm = () => {
     setUserExist(!isUserExist);
   };
@@ -27,10 +32,12 @@ const Login = () => {
       passwordRef.current.value
     );
     setError(validate);
-    if (!isUserExist && validate === null) {
+    if (validate) return;
+
+    if (!isUserExist) {
       createUser(emailRef.current.value, passwordRef.current.value);
     }
-    if (isUserExist && validate === null) {
+    if (isUserExist) {
       signIn(emailRef.current.value, passwordRef.current.value);
     }
     emailRef.current.value = "";
@@ -57,8 +64,10 @@ const Login = () => {
               })
             );
             console.log("user profile updated");
+            // navigate("/browse");
           })
           .catch((error) => {
+            setError(error.message);
             console.log(error);
           });
       })
@@ -74,6 +83,7 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
+        // navigate("/browse");
         const user = userCredential.user;
       })
       .catch((error) => {
@@ -85,6 +95,7 @@ const Login = () => {
 
   return (
     <div>
+      <Header />
       <div className="absolute">
         <img
           src="https://assets.nflxext.com/ffe/siteui/vlv3/93da5c27-be66-427c-8b72-5cb39d275279/94eb5ad7-10d8-4cca-bf45-ac52e0a052c0/IN-en-20240226-popsignuptwoweeks-perspective_alpha_website_large.jpg"
@@ -115,7 +126,6 @@ const Login = () => {
           placeholder="Password"
           className="p-4 bg-gray-700 my-2 w-full rounded-lg"
         />
-        {error?.length && <p className="text-white">{error}</p>}
 
         <button
           className="text-white w-full my-4 h-12 text-1xl rounded-lg bg-red-700"

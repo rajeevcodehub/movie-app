@@ -12,12 +12,14 @@ import appStore from "../utils/appStore";
 import { addUser, removeUser } from "../utils/userSlice";
 const Header = () => {
   const navigate = useNavigate();
+
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
   const handleSignOut = () => {
     signOut(auth)
-      .then(() => {})
+      .then(() => {
+        // navigate("/")
+      })
       .catch((error) => {
         navigate("/error");
       });
@@ -26,8 +28,6 @@ const Header = () => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
         const { uid, email, displayName, photoURL } = user;
         dispatch(
           addUser({
@@ -37,6 +37,7 @@ const Header = () => {
             photoURL: photoURL,
           })
         );
+
         navigate("/browse");
         // ...
       } else {
@@ -45,9 +46,11 @@ const Header = () => {
         navigate("/");
       }
     });
+    return () => unSubscribe();
     // This will be called when component unmounts
     // return ( () => unSubscribe())
   }, []);
+
   return (
     <div className="absolute flex justify-between w-screen px-8 py-2 bg-gradient-to-b from-black z-10">
       <img className="w-44" src={NetfNetflix_Logo} alt="netflix-logo" />
