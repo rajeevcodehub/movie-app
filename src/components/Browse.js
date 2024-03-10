@@ -1,8 +1,11 @@
 import Header from "./Header";
-import {API_OPTIONS} from '../utils/constant'
+import useGetNowPlayingMovies from "../hooks/useGetNowPlayingMovies";
 
 const Browse = () => {
-    console.log(API_OPTIONS);
+    
+   const nowPlayingMovies = useGetNowPlayingMovies();
+   console.log(nowPlayingMovies);
+   
     return (
        <div>
         <Header/>

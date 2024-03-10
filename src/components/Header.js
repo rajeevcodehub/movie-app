@@ -6,9 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { Provider, useDispatch } from "react-redux";
-import appStore from "../utils/appStore";
-
+import {  useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 const Header = () => {
   const navigate = useNavigate();
@@ -48,7 +46,6 @@ const Header = () => {
     });
     return () => unSubscribe();
     // This will be called when component unmounts
-    // return ( () => unSubscribe())
   }, []);
 
   return (
