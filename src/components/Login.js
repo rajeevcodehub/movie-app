@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useRef, useState } from "react";
 import {
   createUserWithEmailAndPassword,
@@ -10,9 +10,9 @@ import { auth } from "../utils/firebase";
 import validation from "../utils/validation";
 import { addUser } from "../utils/userSlice";
 import Header from "./Header";
+import { NetflixBackgroungImage, PROFILE_IMAGE_URL } from "../utils/constant";
 
 const Login = () => {
-  const navigate = useNavigate();
   const [error, setError] = useState("");
   const [isUserExist, setUserExist] = useState(true);
   const dispatch = useDispatch();
@@ -51,7 +51,7 @@ const Login = () => {
         updateProfile(user, {
           displayName: nameRef.current.value,
           photoURL:
-            "https://lh3.googleusercontent.com/a/ACg8ocIaPWI3KJ_oeMpg0n186kKRMUHNDoCBM_IpviI7A3LRtC4=s192-c-rg-br100",
+           PROFILE_IMAGE_URL ,
         })
           .then(() => {
             const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -64,7 +64,6 @@ const Login = () => {
               })
             );
             console.log("user profile updated");
-            // navigate("/browse");
           })
           .catch((error) => {
             setError(error.message);
@@ -82,8 +81,6 @@ const Login = () => {
   const signIn = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
-        // navigate("/browse");
         const user = userCredential.user;
       })
       .catch((error) => {
@@ -97,10 +94,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/93da5c27-be66-427c-8b72-5cb39d275279/94eb5ad7-10d8-4cca-bf45-ac52e0a052c0/IN-en-20240226-popsignuptwoweeks-perspective_alpha_website_large.jpg"
-          alt="image"
-        />
+        <img src={NetflixBackgroungImage} alt="image" />
       </div>
       <form className="absolute w-4/12 p-12 bg-black my-36 mx-auto right-0 left-0  rounded-lg bg-opacity-80">
         <h1 className="font-bold text-3xl py-4 text-white">
