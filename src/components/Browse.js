@@ -1,16 +1,16 @@
 import Header from "./Header";
 import useGetNowPlayingMovies from "../hooks/useGetNowPlayingMovies";
+import { useSelector } from "react-redux";
+import MainContainer from "./MainContainer";
 
 const Browse = () => {
-    
-   const nowPlayingMovies = useGetNowPlayingMovies();
-   console.log(nowPlayingMovies);
-   
-    return (
-       <div>
-        <Header/>
-       </div>
-    );
-}
+  useGetNowPlayingMovies();
+  return (
+    <div className="">
+      <Header />
+      <MainContainer />
+    </div>
+  );
+};
 
 export default Browse;
