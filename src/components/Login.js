@@ -120,7 +120,7 @@ const Login = () => {
           placeholder="Password"
           className="p-4 bg-gray-700 my-2 w-full rounded-lg"
         />
-
+<p className="text-red-500">{error}</p>
         <button
           className="text-white w-full my-4 h-12 text-1xl rounded-lg bg-red-700"
           onClick={(event) => {

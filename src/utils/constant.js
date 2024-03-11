@@ -15,9 +15,12 @@ const NetflixBackgroungImage =
 
 const PROFILE_IMAGE_URL =
   "https://lh3.googleusercontent.com/a/ACg8ocIaPWI3KJ_oeMpg0n186kKRMUHNDoCBM_IpviI7A3LRtC4=s192-c-rg-br100";
+
+const movie_API = "https://api.themoviedb.org/3/movie/1011985/videos";
 export {
   API_OPTIONS,
   nowPlayingMoviesAPI,
   NetflixBackgroungImage,
   PROFILE_IMAGE_URL,
+  movie_API
 };
