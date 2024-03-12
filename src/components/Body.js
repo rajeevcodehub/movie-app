@@ -6,7 +6,6 @@ import Browse from "./Browse";
 
 const Body = () => {
   const router = createBrowserRouter([
-    
     {
       path: "/",
       element: <Login />,
@@ -17,7 +16,11 @@ const Body = () => {
     },
   ]);
 
-  return( <div><RouterProvider router={router} /></div>);
+  return (
+    <div>
+      <RouterProvider router={router} />
+    </div>
+  );
 };
 
 export default Body;
