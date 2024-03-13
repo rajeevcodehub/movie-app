@@ -3,6 +3,7 @@ import Home from "./Home";
 import Login from "./Login";
 import { useDispatch } from "react-redux";
 import Browse from "./Browse";
+import GPTSearch from "./GPTSearch";
 
 const Body = () => {
   const router = createBrowserRouter([
@@ -13,6 +14,10 @@ const Body = () => {
     {
       path: "/browse",
       element: <Browse />,
+    },
+    {
+      path: "/gptsearch",
+      element: <GPTSearch />,
     },
   ]);
 

@@ -23,6 +23,10 @@ const Header = () => {
       });
   };
 
+  const handleGPTSearch = () => {
+    navigate("/gptsearch");
+  }
+
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -59,8 +63,10 @@ const Header = () => {
             </Link>{" "}
           </div>
         )}
+        
         {user && (
           <div className="flex my-4 gap-4">
+            <button className=" bg-red-700 text-black p-1 text-center items-center rounded-md" onClick={handleGPTSearch}>GPT Search</button>
             <button
               onClick={handleSignOut}
               className=" bg-red-700 rounded w-20 text-center items-center  h-8"
