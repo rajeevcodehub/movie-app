@@ -11,7 +11,7 @@ import validation from "../utils/validation";
 import { addUser } from "../utils/userSlice";
 import Header from "./Header";
 import { NetflixBackgroungImage, PROFILE_IMAGE_URL } from "../utils/constant";
-
+import language from "../utils/language";
 const Login = () => {
   const [error, setError] = useState("");
   const [isUserExist, setUserExist] = useState(true);
