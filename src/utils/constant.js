@@ -17,10 +17,13 @@ const PROFILE_IMAGE_URL =
   "https://lh3.googleusercontent.com/a/ACg8ocIaPWI3KJ_oeMpg0n186kKRMUHNDoCBM_IpviI7A3LRtC4=s192-c-rg-br100";
 
 const movie_API = "https://api.themoviedb.org/3/movie/1011985/videos";
+
+const gpt_API = "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";
 export {
   API_OPTIONS,
   nowPlayingMoviesAPI,
   NetflixBackgroungImage,
   PROFILE_IMAGE_URL,
-  movie_API
+  movie_API,
+  gpt_API,
 };
