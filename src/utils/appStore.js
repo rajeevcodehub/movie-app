@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./userSlice";
 import moviesReducer from './movieSlice'
 import configReducer from './configSlice'
-import { useState } from "react";
+
 
 const appStore = configureStore({
   reducer: {
