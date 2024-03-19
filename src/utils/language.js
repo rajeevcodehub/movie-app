@@ -16,6 +16,12 @@ const language = {
         "signIN" : "Anmelden",
         "signUp" : "Melden Sie sich an",
         "signOut" : "Abmelden",
+    },
+    french: {
+        "search" : "Rechercher des films",
+        "signIN" : "Se connecter",
+        "signUp" : "S'inscrire",
+        "signOut" : "Se déconnecter",
     }
 }
 

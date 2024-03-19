@@ -16,6 +16,7 @@ const GPTSearch = () => {
           <option value="en">English</option>
           <option value="hindi">Hindi</option>
           <option value="german">German</option>
+          <option value="french">French</option>
         </select>
       </div>
       <div>

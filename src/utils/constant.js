@@ -18,7 +18,7 @@ const PROFILE_IMAGE_URL =
 
 const movie_API = "https://api.themoviedb.org/3/movie/1011985/videos";
 
-const gpt_API = "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";
+const gpt_API = "Not to be disclosed";
 export {
   API_OPTIONS,
   nowPlayingMoviesAPI,
