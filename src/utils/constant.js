@@ -3,7 +3,7 @@ const API_OPTIONS = {
   headers: {
     accept: "application/json",
     Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NmYwN2IxMDFiMjBjZWVmZjYwM2YwZDQ0MTRmMTBlYSIsInN1YiI6IjY1ZTg5OTc1OTYzODY0MDE4MWNhMmU5NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HFs2LN6HFld7uxewHuPklf0C-0EmKF9WKY6PwCAxiQQ",
+      "Bearer "+ process.env.REACT_APP_TMDB_API_KEY,
   },
 };
 
@@ -18,7 +18,7 @@ const PROFILE_IMAGE_URL =
 
 const movie_API = "https://api.themoviedb.org/3/movie/1011985/videos";
 
-const gpt_API = "Not to be disclosed";
+const gpt_API = process.env.REACT_APP_GPT_API_KEY;
 export {
   API_OPTIONS,
   nowPlayingMoviesAPI,

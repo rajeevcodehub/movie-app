@@ -4,11 +4,12 @@ import Search from "./Search";
 import Header from "./Header";
 import { useDispatch } from "react-redux";
 import { changeLanguage } from "../utils/configSlice";
+import GPTMovieSuggestion from "./GPTMovieSuggestion";
 const GPTSearch = () => {
   const dispatch = useDispatch();
- const handleLanguageChange = (e) => {
+  const handleLanguageChange = (e) => {
     dispatch(changeLanguage(e.target.value));
-  }
+  };
   return (
     <div>
       <div className="absolute flex right-0 rounded-md p-5 ">
@@ -20,8 +21,9 @@ const GPTSearch = () => {
         </select>
       </div>
       <div>
-        <Search />
         <img src={NetflixBackgroungImage} alt="image" />
+        <Search />
+        <GPTMovieSuggestion/>
       </div>
     </div>
   );
