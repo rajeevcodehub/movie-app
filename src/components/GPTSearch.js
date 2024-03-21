@@ -11,8 +11,10 @@ const GPTSearch = () => {
     dispatch(changeLanguage(e.target.value));
   };
   return (
-    <div>
-      <div className="absolute flex right-0 rounded-md p-5 ">
+    <div className="">
+      <img src={NetflixBackgroungImage} alt="image" className="relative" />
+
+      <div className="absolute flex top-0 right-0 rounded-md p-5 ">
         <select className="rounded-sm" onChange={handleLanguageChange}>
           <option value="en">English</option>
           <option value="hindi">Hindi</option>
@@ -20,11 +22,9 @@ const GPTSearch = () => {
           <option value="french">French</option>
         </select>
       </div>
-      <div>
-        <img src={NetflixBackgroungImage} alt="image" />
-        <Search />
-        <GPTMovieSuggestion/>
-      </div>
+      <Search />
+      <GPTMovieSuggestion />
+     
     </div>
   );
 };

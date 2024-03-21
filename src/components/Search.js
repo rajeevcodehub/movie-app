@@ -10,6 +10,7 @@ const Search = () => {
   const languageSelected = useSelector((store) => store.config?.lang);
   const searchText = useRef(null);
   const searchTMDBMovies = async (movie) => {
+    console.log(movie)
     const response = await fetch(
       "https://api.themoviedb.org/3/search/movie?query=" +
         { movie } +
@@ -34,7 +35,6 @@ const Search = () => {
         model: "gpt-3.5-turbo",
       });
       gptMovies = movieRecommended.choices?.[0]?.message?.content.split(",");
-      console.log(gptMovies);
 
       const promiseArray = gptMovies.map((movie) => searchTMDBMovies(movie));
 
@@ -42,7 +42,6 @@ const Search = () => {
       dispatch(
         addGPTMovies({ movieName: gptMovies, movieResults: tmdbResults })
       );
-      console.log(tmdbResults);
     } catch (error) {
       console.log(error);
     }
