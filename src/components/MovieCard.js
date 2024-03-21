@@ -1,4 +1,5 @@
 const MovieCard = ({ movie }) => {
+  console.log(movie);
   return (
     <div>
       <div className="w-36 ">
@@ -7,7 +8,7 @@ const MovieCard = ({ movie }) => {
           alt="movie poster"
         />
       </div>
-      <h1>{movie.title}</h1>
+      <h1 className="text-white">{movie.title}</h1>
       {/* <p>{movie.overview}</p> */}
     </div>
   );
