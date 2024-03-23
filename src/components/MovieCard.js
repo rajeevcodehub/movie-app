@@ -1,15 +1,19 @@
 const MovieCard = ({ movie }) => {
-  console.log(movie);
+  const { title, poster_path } = movie;
+
   return (
-    <div>
-      <div className="w-36 ">
-        <img
-          src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-          alt="movie poster"
-        />
-      </div>
-      <h1 className="text-white">{movie.title}</h1>
-      {/* <p>{movie.overview}</p> */}
+    <div className="">
+      {poster_path && (
+        <div>
+          <div className="w-40 ">
+            <img
+              src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+              alt="movie poster"
+            />
+          </div>
+          <h1 className="  text-black flex flex-auto">{title}</h1>
+        </div>
+      )}
     </div>
   );
 };

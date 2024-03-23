@@ -12,7 +12,7 @@ const GPTSearch = () => {
   };
   return (
     <div className="">
-      <img src={NetflixBackgroungImage} alt="image" className="relative" />
+      <img src={NetflixBackgroungImage} alt="image" className="" />
 
       <div className="absolute flex top-0 right-0 rounded-md p-5 ">
         <select className="rounded-sm" onChange={handleLanguageChange}>

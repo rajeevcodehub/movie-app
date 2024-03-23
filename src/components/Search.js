@@ -10,11 +10,12 @@ const Search = () => {
   const languageSelected = useSelector((store) => store.config?.lang);
   const searchText = useRef(null);
   const searchTMDBMovies = async (movie) => {
-    console.log(movie)
+    console.log(movie);
     const response = await fetch(
       "https://api.themoviedb.org/3/search/movie?query=" +
-        { movie } +
-        "&include_adult=false&language=en-US&page=1",
+        movie +
+        "&region=in",
+
       API_OPTIONS
     );
     const jsonData = await response.json();
@@ -27,9 +28,9 @@ const Search = () => {
     let gptMovies = [];
     try {
       const gptQuery =
-        "Act Like a movie Recommendation System and recommend 5 movie name related to " +
+        "Act Like a movie Recommendation System and recommend 5 indian movie name related to " +
         movieSerchText +
-        ". Only give 5 movies name comma separated like example: movie1, movie2, movie3, movie4, movie5";
+        "Only give 5 movies name comma separated like example: movie1, movie2, movie3, movie4, movie5";
       const movieRecommended = await openai.chat.completions.create({
         messages: [{ role: "user", content: gptQuery }],
         model: "gpt-3.5-turbo",
@@ -60,6 +61,7 @@ const Search = () => {
       >
         Search
       </button>
+      
     </div>
   );
 };

@@ -1,23 +1,22 @@
 import { useSelector } from "react-redux";
 import MovieCard from "./MovieCard";
+import MovieList from "./MovieList";
 
 const GPTMovieSuggestion = () => {
   const { movieName, movieResults } = useSelector((state) => state.gpt);
   console.log(movieName, movieResults);
 
   return (
-    <div className="absolute top-64">
-      <h1 className="  text-white">Movie Suggestion</h1>
-      <div className="">
+    <div className="absolute top-64 bg-red-200 z-10 p-5">
+      
+      <h1 className="flex text-white  ">Movie Suggestion</h1>
+      
+      <div className="m-5">
       {movieName?.map((movie, key) => {
         return (
           <div className="">
-            <h1 className="text-orange-600">{movie}</h1>
-            <div className="flex">
-            {movieResults[key]?.map((movie, key) => {
-               return <MovieCard movie={movie} />
-                
-            })}
+            <div className="flex gap-2 ">
+            <MovieList title = {movie} movies={movieResults[key]} />
             </div>
           </div>
         );
